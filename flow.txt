@@ -1,0 +1,66 @@
+UIDS (joined users)
+0 - user id
+2 - users id
+
+allowed_players (position)
+0 -yes
+1 - no
+2 - yes
+3 - no
+
+
+gametype
+diamonds: -1 (free)
+diamonds_game: no 
+
+number_of_players: 2
+
+players
+0 - sunny
+2 - asif
+
+action
+Roll Dice
+action_name:"roll_dice"
+action_salt:"1gd0k6lc9"
+action_value:3 // roll goti ka number
+playernumber:"0" 
+
+# Chal 
+action_name: "move"
+action_salt: "29761"
+action_value:"2" // goti ka number
+playernumber:"0"
+
+# Nhi chala to
+action_name: "next_turn"
+action_salt: "-1"
+action_value: "2"
+playernumber: "-1"
+
+# Steps
+playernumber: 2
+roomid: "jfdhdosfds"
+steps: 4
+
+
+
+
+gamestate
+ -> dicedata
+    -> dice_value: 0
+    -> rolled : no
+
+-> players
+ -> 0
+  -> 1: 0
+  -> 2: 0
+  -> 3:0
+  -> 4:0
+ -> 2
+    -> 1: 0
+    -> 2: 0
+    -> 3:0
+    -> 4:0
+
+ turn: 0
