@@ -45,7 +45,6 @@ app.get("/", (req, res) => {
 require("./app/routes/rolldice.routes")(app);
 
 // Socket Connection
-io.on("connection", onNewWebsocketConnection);
 
 const onNewWebsocketConnection = (socket) => {
     console.info(`Socket ${socket.id} has connected.`);
@@ -93,12 +92,14 @@ const onNewWebsocketConnection = (socket) => {
   
     // echoes on the terminal every "back_to_server" message this socket sends
     // will send a message only to this socket (different than using `io.emit()`, which would broadcast it)
-    socket.on("back_to_server", msg => console.info(`Socket ${socket.id} says: "${msg}"`));
+    // socket.on("back_to_server", msg => console.info(`Socket ${socket.id} says: "${msg}"`));
   }
 
   const getRandomNumberByRollingDice = () => {
     return Math.floor(Math.random()*6 + 1);
   }
+
+  io.on("connection", onNewWebsocketConnection);
 
   // set port, listen for requests
 const PORT = process.env.PORT || 8080;
