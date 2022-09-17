@@ -2,7 +2,15 @@ const express = require('express'),
 http = require('http'),
 app = express(),
 server = http.createServer(app),
-io = require('socket.io').listen(server);
+socketio = require('socket.io')
+const io = socketio(server);
+const PORT = process.env.PORT || 8080;
+// io.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}.`);
+// });
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+  });
 app.get('/', (req, res) => {
 
 res.send('Chat Server is running on port 3000')
