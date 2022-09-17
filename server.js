@@ -1,13 +1,18 @@
 const express = require('express'),
     http = require('http'),
+    https = require("https"),
     app = express(),
     // server = http.createServer(app),
     socketio = require('socket.io');
-const { Server } = require("socket.io");
-const PORT = process.env.PORT || 8080;
-const server = http.createServer(app);
+
+const PORT = process.env.PORT || 1234;
+// io.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}.`);
+// });
+const options = { transport: ["polling", "websocket"] }
+let server = http.createServer(app);
+const io = require("socket.io")(server, options);
 // const io = socketio(server);
-const io = new Server(server);
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });

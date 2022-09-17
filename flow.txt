@@ -64,3 +64,13 @@ gamestate
     -> 4:0
 
  turn: 0
+
+
+transports  : [ 
+'xhr-polling',
+        'websocket',
+        'polling',
+        'flashsocket',
+        'htmlfile',
+        'jsonp-polling'
+ ]
