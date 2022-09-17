@@ -1,13 +1,38 @@
 const express = require('express'),
     http = require('http'),
+    https = require("https"),
     app = express(),
     // server = http.createServer(app),
     socketio = require('socket.io');
-const { Server } = require("socket.io");
 const PORT = process.env.PORT || 8080;
-const server = http.createServer(app);
-// const io = socketio(server);
-const io = new Server(server);
+// io.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}.`);
+// });
+
+let server;
+if (process.env.SETUP_HOST === "https") {
+    const SSL_DOMAIN = process.env.SSL_DOMAIN
+    const privateKey = fs.readFileSync(
+        "/etc/letsencrypt/live/" + SSL_DOMAIN + "/privkey.pem"
+    );
+    const certificate = fs.readFileSync(
+        "/etc/letsencrypt/live/" + SSL_DOMAIN + "/fullchain.pem"
+    );
+
+    const ca = fs.readFileSync("/etc/letsencrypt/live/" + SSL_DOMAIN + "/cert.pem");
+
+    server = https.createServer(
+        {
+            key: privateKey,
+            cert: certificate,
+            ca,
+        },
+        app
+    );
+} else {
+    server = http.createServer(app);
+}
+const io = socketio(server);
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
